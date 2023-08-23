@@ -22,7 +22,7 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 require("./config/db.js");
 
 //routes
-const router = require("./routes/Router");
+const router = require("./routes/Router.js");
 
 app.use(router);
 
