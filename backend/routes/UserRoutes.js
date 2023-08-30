@@ -7,6 +7,7 @@ const {
   login,
   getCurrentUser,
   update,
+  getUserByID,
 } = require("../controllers/UserController");
 
 //Middlewares
@@ -26,6 +27,7 @@ router.post("/login", loginValidation(), validate, login);
 
 //GET
 router.get("/profile", authGuard, getCurrentUser);
+router.get("/:id", getUserByID);
 
 //PUT
 router.put(
