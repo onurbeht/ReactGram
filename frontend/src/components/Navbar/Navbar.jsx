@@ -13,13 +13,15 @@ import {
 
 const Navbar = () => {
   return (
-    <nav>
-      <Link to="/">ReactGram</Link>
-      <form>
+    <nav className={styles.navbar}>
+      <Link to="/" className={styles.title}>
+        ReactGram
+      </Link>
+      <form className={styles.searchForm}>
         <BsSearch />
         <input type="text" />
       </form>
-      <ul>
+      <ul className={styles.links}>
         <li>
           <NavLink to="/">
             <BsHouseDoorFill />

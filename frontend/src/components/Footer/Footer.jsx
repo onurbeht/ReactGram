@@ -7,7 +7,10 @@ const Footer = () => {
     <footer className={styles.footer}>
       <p>ReactGram &copy; 2023</p>
       <p>
-        Created by <a href="https://github.com/onurbeht">Bruno Oliveira</a>
+        Created by{" "}
+        <a href="https://github.com/onurbeht" target="_blank">
+          Bruno Oliveira
+        </a>
       </p>
     </footer>
   );
