@@ -22,7 +22,7 @@ const register = async (req, res) => {
 
   if (user) {
     res.status(422).json({
-      errros: ["Por favor, utilize outro email"],
+      errors: ["Por favor, utilize outro email"],
     });
     return;
   }

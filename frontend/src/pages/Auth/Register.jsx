@@ -1,15 +1,26 @@
 //CSS
 import styles from "./Auth.module.css";
 
-import React, { useState } from "react";
-
+//Hooks
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+//Redux
+import { reset, register } from "../../slices/authSlice";
+
+//Components
+import Message from "../../components/Message/Message";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const dispatch = useDispatch();
+
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -18,10 +29,17 @@ const Register = () => {
       name,
       email,
       password,
-      confirmPass,
+      confirmPassword,
     };
-    console.log(user);
+
+    dispatch(register(user));
   };
+
+  //Clean all auth states
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
+
   return (
     <section className={styles.form_container}>
       <h2>ReactGram</h2>
@@ -76,7 +94,12 @@ const Register = () => {
             onChange={(e) => setConfirmPass(e.target.value)}
           />
         </label>
-        <input type="submit" value="Cadastrar" />
+        {!loading ? (
+          <input type="submit" value="Cadastrar" />
+        ) : (
+          <input type="submit" value="Aguarde..." disabled />
+        )}
+        {error && <Message type={"error"} msg={error} />}
       </form>
       <p className={styles.subtitle}>
         Já tem conta? <Link to="/Login">Entrar</Link>
