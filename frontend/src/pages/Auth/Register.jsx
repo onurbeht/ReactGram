@@ -90,8 +90,8 @@ const Register = () => {
             placeholder="Confirme sua senha"
             minLength={6}
             required={true}
-            value={confirmPass}
-            onChange={(e) => setConfirmPass(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>
         {!loading ? (
