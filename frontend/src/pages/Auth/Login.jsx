@@ -48,7 +48,7 @@ const Login = () => {
             name="email"
             placeholder="Insira seu email"
             required={true}
-            value={email}
+            value={email || ""}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
@@ -60,7 +60,7 @@ const Login = () => {
             placeholder="Insira sua senha"
             minLength={6}
             required={true}
-            value={password}
+            value={password || ""}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
