@@ -1,0 +1,19 @@
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border-bottom: 1px solid #363636;
+}
+
+.header img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+}

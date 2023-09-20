@@ -55,7 +55,7 @@ const Register = () => {
             placeholder="Insira seu nome"
             minLength={3}
             required={true}
-            value={name || ""}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
@@ -66,7 +66,7 @@ const Register = () => {
             name="email"
             placeholder="Insira seu email"
             required={true}
-            value={email || ""}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
@@ -78,7 +78,7 @@ const Register = () => {
             placeholder="Crie sua senha"
             minLength={6}
             required={true}
-            value={password || ""}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
@@ -90,7 +90,7 @@ const Register = () => {
             placeholder="Confirme sua senha"
             minLength={6}
             required={true}
-            value={confirmPassword || ""}
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>

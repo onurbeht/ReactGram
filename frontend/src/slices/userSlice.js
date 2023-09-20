@@ -10,7 +10,7 @@ const initialState = {
 };
 
 //Funções
-//Get user details
+//Get user details by token
 export const profile = createAsyncThunk(
   "user/profile",
   async (user, thunkAPI) => {
@@ -34,6 +34,16 @@ export const updateProfile = createAsyncThunk(
     if (data.errors) {
       return thunkAPI.rejectWithValue(data.errors[0]);
     }
+
+    return data;
+  }
+);
+
+//Get user details by id
+export const getUserDetails = createAsyncThunk(
+  "user/get",
+  async (id, thunkAPI) => {
+    const data = await userService.getUserDetails(id);
 
     return data;
   }
@@ -76,6 +86,17 @@ export const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.user = {};
+      })
+      //GetUserDetails
+      .addCase(getUserDetails.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getUserDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.success = true;
+        state.user = action.payload;
       });
   },
 });
