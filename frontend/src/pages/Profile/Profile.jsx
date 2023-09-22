@@ -13,7 +13,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 //Redux
 import { getUserDetails } from "../../slices/userSlice";
-import { resetMessage, publishPhoto } from "../../slices/photoSlice";
+import {
+  resetMessage,
+  publishPhoto,
+  getUserPhotos,
+} from "../../slices/photoSlice";
 
 const Profile = () => {
   const { id } = useParams();
@@ -40,6 +44,7 @@ const Profile = () => {
   //Load user data
   useEffect(() => {
     dispatch(getUserDetails(id));
+    dispatch(getUserPhotos(id));
   }, [dispatch, id]);
 
   const handleImage = (e) => {
@@ -90,9 +95,9 @@ const Profile = () => {
           <p>{user.bio}</p>
         </div>
       </div>
-      {id === userAuth._id ? (
+      {id === userAuth._id && (
         <>
-          <div ref={newPhotoForm}>
+          <div ref={newPhotoForm} className={styles.form_photo}>
             <h2>Compartilhe algum momento seu:</h2>
             <form onSubmit={handleSubmit}>
               <label>
@@ -120,9 +125,35 @@ const Profile = () => {
             </form>
           </div>
         </>
-      ) : (
-        ""
       )}
+      <h2>Fotos publicadas:</h2>
+      <div className={styles.photo_container}>
+        {photos &&
+          photos.map((photo) => (
+            <div key={photo._id} className={styles.photo}>
+              {photo.image && (
+                <img
+                  src={`${uploads}/photos/${photo.image}`}
+                  alt={photo.title}
+                />
+              )}
+              {id === userAuth._id ? (
+                <div className={styles.actions}>
+                  <Link to={`/photos/${photo._id}`}>
+                    <BsFillEyeFill />
+                  </Link>
+                  <BsPencilFill />
+                  <BsXLg />
+                </div>
+              ) : (
+                <Link className="btn" to={`/photos/${photo._id}`}>
+                  Ver
+                </Link>
+              )}
+            </div>
+          ))}
+        {photos.length === 0 && <p>Ainda não há fotos publicadas.</p>}
+      </div>
     </div>
   );
 };

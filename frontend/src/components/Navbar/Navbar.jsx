@@ -30,6 +30,8 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     dispatch(reset());
+
+    navigate("/login");
   };
 
   return (
