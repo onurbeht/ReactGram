@@ -1,0 +1,13 @@
+.like_container {
+  display: flex;
+  align-items: center;
+}
+
+.like_container svg {
+  font: 1.5rem;
+  cursor: pointer;
+}
+
+.like_container p {
+  margin-left: 1rem;
+}

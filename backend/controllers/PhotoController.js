@@ -153,8 +153,9 @@ const likePhoto = async (req, res) => {
   if (photo.likes.includes(reqUser._id)) {
     photo.likes.splice(photo.likes.indexOf(reqUser._id, 1));
     await photo.save();
-    res.status(200).json({ message: "Like removido" });
-    return;
+    return res
+      .status(200)
+      .json({ message: "Like removido", userId: reqUser._id });
   } else {
     //Put user._id em likes
     await photo.likes.push(reqUser._id);
