@@ -13,6 +13,7 @@ import Register from "./pages/Auth/Register";
 import NotFound from "./pages/NotFound/NotFound";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/Profile/Profile";
+import Photo from "./pages/Photo/Photo";
 
 //Components
 import Navbar from "./components/Navbar/Navbar";
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/users/:id"
               element={auth ? <Profile /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/photos/:id"
+              element={auth ? <Photo /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"
