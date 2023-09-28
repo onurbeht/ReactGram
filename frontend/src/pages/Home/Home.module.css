@@ -1,0 +1,20 @@
+.home_container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.btn_home {
+  display: block;
+  max-width: 5rem;
+  text-align: center;
+  margin: 0.5rem 0 2rem 0;
+}
+
+.no_photos {
+  text-align: center;
+}
+
+.no_photos a {
+  color: #0094f6;
+}

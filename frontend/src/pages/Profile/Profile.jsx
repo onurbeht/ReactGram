@@ -202,6 +202,7 @@ const Profile = () => {
       <h2>Fotos publicadas:</h2>
       <div className={styles.photo_container}>
         {photos &&
+          photos.length > 0 &&
           photos.map((photo) => (
             <div key={photo._id} className={styles.photo}>
               {photo.image && (
@@ -225,7 +226,7 @@ const Profile = () => {
               )}
             </div>
           ))}
-        {photos.length === 0 && <p>Ainda não há fotos publicadas.</p>}
+        {photos && photos.length === 1 && <p>Ainda não há fotos publicadas.</p>}
       </div>
     </div>
   );

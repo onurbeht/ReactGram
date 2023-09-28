@@ -4,7 +4,7 @@ import { uploads } from "../../utils/config";
 
 //Components
 import Message from "../../components/Message/Message";
-import PhotoItem from "../../components/PhotoItem/photoItem";
+import PhotoItem from "../../components/PhotoItem/PhotoItem";
 import Like from "../../components/Like/Like";
 
 //Hooks
@@ -86,7 +86,7 @@ const Photo = () => {
           <input
             type="text"
             placeholder="Insira seu comentário..."
-            minLength={2}
+            minLength={1}
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
           />
