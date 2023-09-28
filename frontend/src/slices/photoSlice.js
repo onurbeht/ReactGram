@@ -275,7 +275,6 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.success = true;
-
         state.photo.comments.push(action.payload.comment);
 
         state.message = action.payload.message;
