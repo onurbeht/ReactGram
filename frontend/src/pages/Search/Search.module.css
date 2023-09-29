@@ -1,0 +1,16 @@
+.search_container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.search_container h2 {
+  text-align: center;
+}
+
+.btn_search {
+  display: block;
+  max-width: 5rem;
+  text-align: center;
+  margin: 0.5rem 0 2rem 0;
+}

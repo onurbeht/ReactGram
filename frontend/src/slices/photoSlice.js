@@ -148,6 +148,23 @@ export const getAllPhotos = createAsyncThunk(
   }
 );
 
+//Search photos by title
+export const searchPhotos = createAsyncThunk(
+  "photo/search",
+  async (query, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user.token;
+
+    const data = photoService.searchPhotos(query, token);
+
+    //check for errors
+    if (data.errors) {
+      return thunkAPI.rejectWithValue(data.errors[0]);
+    }
+
+    return data;
+  }
+);
+
 export const photoSlice = createSlice({
   name: "photo",
   initialState,
@@ -296,6 +313,22 @@ export const photoSlice = createSlice({
         state.photos = action.payload;
       })
       .addCase(getAllPhotos.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.photos = [];
+      })
+      //Search
+      .addCase(searchPhotos.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(searchPhotos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.success = true;
+        state.photos = action.payload;
+      })
+      .addCase(searchPhotos.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
         state.photos = [];

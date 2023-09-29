@@ -1,21 +1,23 @@
-//CSS
-import styles from "./Home.module.css";
+import styles from "./Search.module.css";
 
-//Components
-import Like from "../../components/Like/Like";
-import PhotoItem from "../../components/PhotoItem/PhotoItem";
-import Message from "../../components/Message/Message";
-
-//Hooks
+// hooks
+import { useQuery } from "../../hooks/useQuery";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useResetComponentMessage } from "../../hooks/useResetComponentMessage";
 
-//Redux
-import { getAllPhotos, likePhoto } from "../../slices/photoSlice";
+//Components
+import PhotoItem from "../../components/PhotoItem/PhotoItem";
+import Like from "../../components/Like/Like";
 
-const Home = () => {
+//Redux
+import { likePhoto, searchPhotos } from "../../slices/photoSlice";
+
+const Search = () => {
+  const query = useQuery();
+  const search = query.get("q");
+
   const dispatch = useDispatch();
 
   const resetMessage = useResetComponentMessage(dispatch);
@@ -23,10 +25,10 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth);
   const { loading, error, photos } = useSelector((state) => state.photo);
 
-  //Load all  photos
+  //Load photos
   useEffect(() => {
-    dispatch(getAllPhotos());
-  }, [dispatch, user]);
+    dispatch(searchPhotos(search));
+  }, [dispatch, search]);
 
   //Like a photo
   const handleLike = (photo) => {
@@ -35,32 +37,32 @@ const Home = () => {
     resetMessage();
   };
 
-  //console.log(photos);
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
   return (
-    <div className={styles.home_container}>
-      {photos &&
+    <div className={styles.search_container}>
+      <h2>Você está buscando por: {search}</h2>
+      {photos && photos.errors ? (
+        <p>Não foram encontrados resultados para sua busca...</p>
+      ) : (
+        photos &&
         photos.map((photo) => (
           <div key={photo._id}>
             <PhotoItem photo={photo} />
             <Like photo={photo} user={user} handleLike={handleLike} />
             <Link
-              className={`btn ${styles.btn_home}`}
+              className={`btn ${styles.btn_search}`}
               to={`/photos/${photo._id}`}
             >
               Ver mais
             </Link>
           </div>
-        ))}
-      {photos && photos.length === 0 && (
-        <h2 className={styles.no_photos}>
-          {" "}
-          Ainda não há fotos publicadas.{" "}
-          <Link to={`/users/${user._id}`}>Publicar</Link>
-        </h2>
+        ))
       )}
     </div>
   );
 };
 
-export default Home;
+export default Search;
