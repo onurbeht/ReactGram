@@ -29,13 +29,17 @@ const Home = () => {
   }, [dispatch, user]);
 
   //Like a photo
-  const handleLike = (photo) => {
+  const handleLike = (photo = null) => {
     dispatch(likePhoto(photo._id));
 
     resetMessage();
   };
 
   //console.log(photos);
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
 
   return (
     <div className={styles.home_container}>
